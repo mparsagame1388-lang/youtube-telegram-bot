@@ -58,5 +58,5 @@ def get_links(message):
 
         except Exception as e:
             bot.send_message(message.chat.id, f"❌ خطا در دانلود {url}:\n{e}")
-
+bot.delete_webhook()
 bot.polling()
