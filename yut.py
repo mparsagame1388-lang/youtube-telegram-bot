@@ -13,7 +13,7 @@ if not os.path.exists(DOWNLOAD_DIR):
     os.makedirs(DOWNLOAD_DIR)
 
 # مسیر فایل کوکی
-COOKIE_FILE = "/sdcard/Download/youtyube1/Cookies.txt"
+COOKIE_FILE = "/sdcard/Download/youtyube1/Cookiess.txt"
 
 # ذخیره لینک‌ها برای کاربر
 user_links = {}
