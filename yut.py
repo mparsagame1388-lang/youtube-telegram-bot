@@ -18,6 +18,9 @@ COOKIE_FILE = "/storage/emulated/0/Download/youtyube1/Cookies.txt"
 # ذخیره لینک‌ها برای کاربر
 user_links = {}
 
+# حذف webhook اگر فعال باشه
+bot.delete_webhook()
+
 # start
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -37,12 +40,15 @@ def get_links(message):
     for url in links:
         try:
             file_path = os.path.join(DOWNLOAD_DIR, "%(title)s.%(ext)s")
+            
+            # اگر فایل کوکی وجود دارد، از آن استفاده کن
             ydl_opts = {
                 "format": "best",
                 "outtmpl": file_path,
-                "quiet": True,
-                "cookiefile": COOKIE_FILE
+                "quiet": True
             }
+            if os.path.exists(COOKIE_FILE):
+                ydl_opts["cookiefile"] = COOKIE_FILE
 
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                 info = ydl.extract_info(url, download=True)
@@ -58,5 +64,6 @@ def get_links(message):
 
         except Exception as e:
             bot.send_message(message.chat.id, f"❌ خطا در دانلود {url}:\n{e}")
-bot.delete_webhook()
+
+# شروع polling
 bot.polling()
