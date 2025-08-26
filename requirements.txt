@@ -1,5 +1,5 @@
 pyTelegramBotAPI==4.12.0
-Pillow==9.5.0          # برای تبدیل عکس به PDF
-python-docx==0.8.11     # برای تبدیل PDF ↔ Word
+Pillow==9.5.0
+python-docx==0.8.11
 requests==2.31.0
 python-dotenv==1.0.0
