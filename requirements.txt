@@ -1,7 +1,5 @@
 pyTelegramBotAPI==4.12.0
-Pillow==10.1.0          # برای تبدیل عکس به PDF
-python-docx==0.8.12     # برای تبدیل PDF ↔ Word
+Pillow==9.5.0          # برای تبدیل عکس به PDF
+python-docx==0.8.11     # برای تبدیل PDF ↔ Word
 requests==2.31.0
 python-dotenv==1.0.0
-pdf2image==1.16.3       # برای تبدیل PDF به عکس (اختیاری)
-yt-dlp==2025.08.26       # فقط اگه میخوای قابلیت دانلود هم داشته باشه
