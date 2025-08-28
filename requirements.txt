@@ -1,0 +1,6 @@
+pyTelegramBotAPI
+Pillow
+python-docx
+openpyxl
+python-pptx
+qrcode
