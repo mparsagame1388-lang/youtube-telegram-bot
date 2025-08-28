@@ -203,6 +203,10 @@ user_qr_mode = set()
 
 @bot.message_handler(func=lambda m: m.text == '🟢 QR کد بساز')
 def start_qr(message):
+    # پاک کردن حالت‌های قبلی کاربر برای جلوگیری از تداخل
+    user_photos.pop(message.chat.id, None)
+    user_text_mode.discard(message.chat.id)
+    
     user_qr_mode.add(message.chat.id)
     bot.send_message(message.chat.id, "📌 متن یا لینک خودت رو بفرست تا QR کد بسازم:")
 
@@ -215,6 +219,7 @@ def generate_qr(message):
     
     bot.send_document(message.chat.id, open(path, "rb"), caption="✅ QR کد آماده شد")
     threading.Timer(30, lambda: os.remove(path)).start()
+    
     user_qr_mode.remove(message.chat.id)
 
 # ---------- اجرای ربات ----------
