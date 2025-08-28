@@ -198,12 +198,15 @@ def handle_sticker(message):
     except Exception as e:
         bot.send_message(message.chat.id, f"❌ خطا در تبدیل استیکر: {str(e)}")
 
-# ----------کیو آر کد ----------
+# ---------- QR کد ----------
+user_qr_mode = set()
+
 @bot.message_handler(func=lambda m: m.text == '🟢 QR کد بساز')
 def start_qr(message):
+    user_qr_mode.add(message.chat.id)
     bot.send_message(message.chat.id, "📌 متن یا لینک خودت رو بفرست تا QR کد بسازم:")
 
-@bot.message_handler(func=lambda m: True)  # پیام بعدی متن کاربر
+@bot.message_handler(func=lambda m: m.chat.id in user_qr_mode and m.content_type == 'text')
 def generate_qr(message):
     text = message.text
     img = qrcode.make(text)
@@ -212,6 +215,7 @@ def generate_qr(message):
     
     bot.send_document(message.chat.id, open(path, "rb"), caption="✅ QR کد آماده شد")
     threading.Timer(30, lambda: os.remove(path)).start()
+    user_qr_mode.remove(message.chat.id)
 
 # ---------- اجرای ربات ----------
 bot.infinity_polling()
