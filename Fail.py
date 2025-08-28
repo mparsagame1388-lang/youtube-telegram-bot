@@ -203,7 +203,7 @@ user_qr_mode = set()
 
 @bot.message_handler(func=lambda m: m.text == '🟢 QR کد بساز')
 def start_qr(message):
-    # پاک کردن حالت‌های قبلی کاربر برای جلوگیری از تداخل
+    # پاک کردن حالت‌های دیگر کاربر برای جلوگیری از تداخل
     user_photos.pop(message.chat.id, None)
     user_text_mode.discard(message.chat.id)
     
