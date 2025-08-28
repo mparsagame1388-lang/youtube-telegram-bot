@@ -207,24 +207,28 @@ def start_qr(message):
     user_photos.pop(message.chat.id, None)
     user_text_mode.discard(message.chat.id)
     
+    # اضافه کردن کاربر به حالت QR
     user_qr_mode.add(message.chat.id)
-    bot.send_message(message.chat.id, "📌 متن یا لینک خودت رو بفرست تا QR کد بسازم:")
+    bot.send_message(message.chat.id, "📌 لطفاً متن یا لینک خود را بفرستید تا QR کد ساخته شود:")
 
 @bot.message_handler(func=lambda m: m.chat.id in user_qr_mode)
 def generate_qr(message):
-    # فقط پیام متنی پردازش بشه
     if message.content_type != 'text':
-        bot.send_message(message.chat.id, "❌ لطفا فقط متن یا لینک وارد کنید.")
+        bot.send_message(message.chat.id, "❌ لطفاً فقط متن یا لینک وارد کنید.")
         return
 
-    text = message.text
-    img = qrcode.make(text)
+    # ساخت QR کد
+    img = qrcode.make(message.text)
     path = tempfile.mktemp(".png")
     img.save(path)
     
+    # ارسال فایل QR
     bot.send_document(message.chat.id, open(path, "rb"), caption="✅ QR کد آماده شد")
+    
+    # پاک کردن فایل موقت بعد از ۳۰ ثانیه
     threading.Timer(30, lambda: os.remove(path)).start()
     
+    # حذف کاربر از حالت QR
     user_qr_mode.remove(message.chat.id)
 
 # ---------- اجرای ربات ----------
