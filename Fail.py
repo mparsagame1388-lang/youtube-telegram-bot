@@ -24,8 +24,7 @@ def main_menu():
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     markup.row('📸 عکس به PDF', '📄 Word به PDF')
     markup.row('📊 Excel به PDF', '🎞 PowerPoint به PDF')
-    markup.row('📝 متن به PDF', '🎭 استیکر به عکس')
-    markup.row('🟢 ساخت QR کد')
+    markup.row('📝 متن به PDF', '🎭 استیکر به عکس'
     markup.row('📌 راهنما')
     return markup
 
